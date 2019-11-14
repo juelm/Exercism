@@ -4,28 +4,29 @@
 //
 
 export class Matrix {
+
   constructor(stringMatrix) {
     let rowArray = [];
     let columnArray = [];
 
-    for(let i = 0; i < stringMatrix.length; i++){
+    let rowStrings = stringMatrix.split('\n');
+    for(let i = 0; i < rowStrings.length; i++){
       let currentRow = [];
-      if(stringMatrix[i] === "\n"){
-        rowArray.push(currentRow);
-        columnArray.push(currentRow);
-        currentRow = [];
+      let numberStrings = rowStrings[i].split(' ');
+      for(let j = 0; j < numberStrings.length; j++){
+        currentRow.push(numberStrings[j] * 1);
       }
-      else{
-        currentRow.push(stringMatrix[i]);
-      }
+      rowArray.push(currentRow);
     }
 
-    for(let j = 0; j < rowArray.length; j++){
-      for(let k = 0; k < rowArray[i].length; k++){
-        columnArray[k][j] = rowArray[j][k];
+    for(let i = 0; i < rowArray[0].length; i++){
+      let currentColumn = [];
+      for(let j = 0; j < rowArray.length; j++){
+        currentColumn.push(rowArray[j][i]);
       }
+      columnArray.push(currentColumn);
     }
-    
+
     this.rows = rowArray;
     this.columns = columnArray;
 
@@ -40,5 +41,3 @@ export class Matrix {
   }
 }
 
-let matty = new Matrix('1 2 3 4\n5 6 7 8\n9 8 7 6');
-console.log(matty.rows());
